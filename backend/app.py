@@ -1,7 +1,5 @@
-import os, sys
 import config
 import json
-import urllib2
 import flyscanner
 import facebook
 
@@ -19,8 +17,8 @@ CORS(app)
 facebook_app_id = config.FACEBOOK.get('APPLICATION_ID')
 facebook_app_secret = config.FACEBOOK.get('APPLICATION_SECRET')
 
-facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
-facebook_client = facebook.GraphAPI(access_token=facebook_access_token)
+#facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
+facebook_client = facebook.GraphAPI(access_token='')
 
 # temporary acc_token hack
 facebook_client.access_token = 'CAAKMrAl97iIBAMw2HbloZAGrjpoyi8hQ6fMUtACOV6rerZBglvSy5f6OtrE4xPaiOOZA7pVBZBLmZAHwGIr5cj8d7uKIvAExQJYdcgnhT6TPamZBoLwusTIXFdHCFDfhftfxUSsTf2U9ZBv3WZBKA1jZAhXrJ1uhwCUna068rqTcrZB3a6Pq4ml6haBdY6eSWd5brFIZBLE1Bx9VlNRcmvjnyrdCEJTQPmHvGEaWNP7nQgrwAZDZD'
