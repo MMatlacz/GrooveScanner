@@ -1,0 +1,32 @@
+<header class="big">
+  <div class="header__title">GrooveScanner</div>
+  <div class="header__subtitle">Quality events on a budget
+because planning just got easy</div>
+</header>
+
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+    <img class="typeahead__thumbnail" ng-src="{{ match.model.thumbnail }}" ng-if="match.model.thumbnail" />
+    <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+    <div class="typeahead__date">
+      <span ng-if="match.model.starting_date">{{ match.model.starting_date }} <span ng-if="match.model.ending_date">to {{ match.model.ending_date}}</span></span>
+    </div>
+  </a>
+</script>
+
+<div class="search">
+  <div class="search__label">Please, type event name and your location:</div>
+
+  <div class="row" style="line-height:60px;">
+    <div class="inb">
+      <input type="text" ng-model="search.query" ng-change="search.debounceTypeahead()" typeahead="key as key.name for key in search.typeahead" typeahead-template-url="customTemplate.html" class="search__query" placeholder="Event name" />
+    </div>
+    <div class="inb">
+      <input type="text" class="search__location" placeholder="Your current location" />
+    </div>
+    <div class="inb">
+      <input class="search__submit" type="submit" />
+    </div>
+  </div>
+
+</div>

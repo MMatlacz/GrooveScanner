@@ -1,0 +1,155 @@
+/* Do not remove the comments below. It's the markers used by wiredep to inject
+   sass dependencies when defined in the bower.json of your dependencies */
+// bower:scss
+// endbower
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  background-color:#000;
+}
+
+.bg_overlay {
+  background-size: cover;
+  background-image: url('/assets/background.jpg');
+
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height: 100%;
+  z-index: 1;
+}
+
+[ui-view] {
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:auto;
+
+  z-index: 10;
+}
+
+/** HEADER **/
+header {
+  height: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.header__title {
+  font-weight:800;
+  font-size:52pt;
+  margin:100px 0px 0px 0px;
+  text-shadow:1px 1px 3px rgba(0,0,0, 0.1);
+  letter-spacing:-1px;
+}
+
+.header__subtitle {
+  font-weight:400;
+  font-size:20pt;
+}
+
+/** SEARCH BOX **/
+.search {
+  color: #fff;
+
+  border:4px;
+  padding:12px;
+
+  text-align: center;
+  margin: 30px auto auto;
+
+  width:600px;
+
+  .columns {
+    padding:0 !important;
+  }
+}
+
+.search input {
+  background: #fff;
+
+  padding: 0 1em;
+  margin-top:16px;
+  border-radius: 10px;
+  border:1px solid rgba(0,0,0,0.3);
+  font-weight:300;
+  font-size:15px !important;
+  font-family: 'Raleway';
+
+  display:inline-block !important;
+  vertical-align: top;
+
+  &:focus, &:active { outline:none !important; }
+}
+
+.search__query {
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  width:300px !important;
+  border-right: 0px !important;
+}
+
+.search__location {
+  border-radius:0px !important;
+  width:180px !important;
+  border-left:1px solid rgba(0,0,0,0.6);
+}
+
+.search__submit {
+  display:block !important;
+  background:#fff !important;
+
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+
+  color:#444;
+  font-weight:600 !important;
+
+  height:37px;
+  margin-left:-3px;
+}
+
+.search__label {
+  font-weight:300;
+  font-size:15pt;
+  margin-bottom:10px;
+}
+
+.typeahead__date {
+  font-size:9pt;
+}
+
+.typeahead__thumbnail {
+  float:left;
+  height:40px;
+  width:40px;
+  border-radius:3000px;
+}
+
+
+.grid-row {
+  @include grid-row;
+}
+
+.inb { display:inline-block; margin-left:-4px; }
+
+.container {
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* Do not remove the comments below. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
