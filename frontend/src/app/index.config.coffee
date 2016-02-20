@@ -1,8 +1,6 @@
 angular.module 'upc'
-  .config ($logProvider) ->
+  .config ($logProvider, $resourceProvider) ->
     'ngInject'
 
-    #TODO: slashAppend wychujac!!rq39837r
-
-    # Enable log
+    $resourceProvider.defaults.stripTrailingSlashes = false;
     $logProvider.debugEnabled true

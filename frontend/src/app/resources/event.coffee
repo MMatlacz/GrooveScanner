@@ -5,7 +5,7 @@ angular.module 'upc'
     resource = $resource API + 'event/', null,
       query:
         method: 'GET'
-        isArray: false
+        isArray: true
 
       get:
         method: 'GET'

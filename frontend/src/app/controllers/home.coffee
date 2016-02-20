@@ -7,14 +7,11 @@ angular.module 'upc'
 
       query: ''
 
-      debouncer: null
-      debounceTypeahead: ->
-        if $scope.search.debouncer then do $scope.search.debouncer.cancel
+      loading: false
+      search: (query) ->
+        return Event.query(query).$promise.then (data) ->
+          return data
 
-        $scope.search.debouncer = $timeout ->
-          $scope.search.typeahead = Event.query($scope.search.query)
-          $scope.search.debouncer = null
-        , 1000
 
       submit: ->
         console.log "i am lame ;("
