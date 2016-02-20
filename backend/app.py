@@ -17,11 +17,11 @@ CORS(app)
 facebook_app_id = config.FACEBOOK.get('APPLICATION_ID')
 facebook_app_secret = config.FACEBOOK.get('APPLICATION_SECRET')
 
-#facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
+# facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
 facebook_client = facebook.GraphAPI(access_token='')
 
 # temporary acc_token hack
-facebook_client.access_token = 'CAAKMrAl97iIBAMw2HbloZAGrjpoyi8hQ6fMUtACOV6rerZBglvSy5f6OtrE4xPaiOOZA7pVBZBLmZAHwGIr5cj8d7uKIvAExQJYdcgnhT6TPamZBoLwusTIXFdHCFDfhftfxUSsTf2U9ZBv3WZBKA1jZAhXrJ1uhwCUna068rqTcrZB3a6Pq4ml6haBdY6eSWd5brFIZBLE1Bx9VlNRcmvjnyrdCEJTQPmHvGEaWNP7nQgrwAZDZD'
+facebook_client.access_token = 'CAACEdEose0cBADuYrZCdwLztJKdA4qgBr9U7I63yM0WeCfUaCLMqv9yU4hL83ZCA9bgwUFbmZAIdXtyfJI61lZA8FpWZAUEvFfTURp7IGkm2ZASA5JFv2qiSllfZB37N9C4xZB3HXbXTaKrGxaQCDy8Jgt3Pij0jb07kjKVLxbAtuzpRjYcaKxzHRqe2B4ZCVrDOPAeRip21cNiKEqrGgUIjv'
 
 
 @app.route(app_url + '/event/')
@@ -37,7 +37,7 @@ def get_event():
         parsed_results = [
             {key: event[str(key)] for key in config.EVENT.get('FIELDS', [])}
             for event in search_results.get('data', [])
-        ]
+            ]
 
         return json.dumps(parsed_results)
 
@@ -53,6 +53,22 @@ def return_flights():
     return flyscanner.get_airports(request.args['q'])
 
 
+@app.route(app_url + '/hotel/<city>')
+def hotels(city):
+    if request.method == 'GET':
+        return flyscanner.get_hotels_ids(city)
+
+
+@app.route(app_url + '/hotel/')
+def hotel():
+    if request.method == 'GET':
+        id = request.args['id']
+        checkin = request.args['checkin']
+        checkout = request.args['checkout']
+        guests = request.args['guests']
+        rooms = request.args['rooms']
+        print id, checkin, checkout, guests, rooms
+        return json.dumps(flyscanner.get_hotels_list(id, checkin, checkout, guests, rooms))
 
     '''
     market = request.args['market']

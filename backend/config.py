@@ -4,5 +4,5 @@ FACEBOOK = {
 }
 
 EVENT = {
-    'FIELDS': ['name']
+    'FIELDS': ['name', 'id']
 }
