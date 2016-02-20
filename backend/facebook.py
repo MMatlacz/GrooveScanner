@@ -582,7 +582,7 @@ def get_access_token_from_code(code, redirect_uri, app_id, app_secret):
         raise GraphAPIError(response)
 
 
-    def get_app_access_token(app_id, app_secret):
+def get_app_access_token(app_id, app_secret):
     """Get the access_token for the app.
 
     This token can be used for insights and creating test users.
