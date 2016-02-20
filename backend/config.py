@@ -1,0 +1,8 @@
+FACEBOOK = {
+    'APPLICATION_ID': '176402776065155',
+    'APPLICATION_SECRET': '1373d4efda4d69e5df05c21b9e2b85fa'
+}
+
+EVENT = {
+    'FIELDS': ['name']
+}
