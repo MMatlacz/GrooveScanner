@@ -1,7 +1,11 @@
-import urllib2
+k = bin(0)
+for i in range(10000):
+    if(i == 123):
+        pass
+    else:
+        k = bin(int(k, 2) ^ i)
+print "\n"
+print k
 
-print urllib2.urlopen('http://freegeoip.net/json/').read()
-
-import locale
-lang = list(locale.getlocale('EN'))
-print lang
+print int(bin(1013467993 ^ 0b111011100110101100101000000000), 2)
+print bin(1000000000)

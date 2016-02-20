@@ -7,7 +7,7 @@ import flyscanner
 app_url = '/matlaczm/app'
 app = Flask(__name__)
 
-api_key = 'prtl6749387986743898559646983194'
+api_key = 'ah197772008646643372222298324115'
 
 
 def get_api_key():
