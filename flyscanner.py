@@ -1,5 +1,4 @@
 import urllib2
-import pycountry
 from flask import json
 
 
@@ -50,9 +49,9 @@ def get_currencies():
 
     return json.dumps(currencies)
 
-market = "PL"
+market = "UK"
 currency = "EUR"
-locale = "pl-PL"
+locale = "en-GB"
 
 def get_airports(query):
     api_key = get_api_key()
@@ -78,4 +77,4 @@ for c in countries:
 #print country
 #print get_airports("Barcelona")
 #print get_locales()
-print return_grid(market, currency, locale, 'WARS-sky', 'BARC-sky', '2016-08', '2016-09' )
+#print return_grid(market, currency, locale, 'WARS-sky', 'BARC-sky', '2016-08', '2016-09' )

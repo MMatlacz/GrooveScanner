@@ -1,11 +1,13 @@
 import json
 import urllib2
 from flask import Flask, request
+from cors import CORS
 
 import flyscanner
 
 app_url = '/matlaczm/app'
 app = Flask(__name__)
+CORS(app)
 
 api_key = 'ah197772008646643372222298324115'
 
@@ -38,6 +40,11 @@ def get_event_by_id(id):
 
 @app.route(app_url + '/airports/')
 def return_flights():
+    return flyscanner.get_airports(request.args['q'])
+
+
+
+    '''
     market = request.args['market']
     currency = request.args['currency']
     locale = request.args['locale']
@@ -46,7 +53,9 @@ def return_flights():
     outboundPartialDate = request.args['outboundPartialDate']
     inboundPartialDate = request.args['inboundPartialDate']
     return flyscanner.return_grid(market, currency, locale, originPlace, destinationPlace, outboundPartialDate,
-                                  inboundPartialDate)
+                                  inboundPartialDate)'''
+
+
 
 
 if __name__ == '__main__':
