@@ -14,19 +14,20 @@ because planning just got easy</div>
   </a>
 </script>
 
-<div class="search">
-  <div class="search__label">Please, type event name and your location:</div>
+<form ng-submit="search.submit()">
+  <div class="search">
+    <div class="search__label">Please, type event name and your location:</div>
 
-  <div class="row" style="line-height:60px;">
-    <div class="inb">
-      <input type="text" typeahead-loading="search.loading" ng-model="search.query" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue)" typeahead-template-url="customTemplate.html" class="search__query" placeholder="Event name" />
-    </div>
-    <div class="inb">
-      <input type="text" class="search__location" placeholder="Your current location" />
-    </div>
-    <div class="inb">
-      <input class="search__submit" type="submit" />
+    <div class="row" style="line-height:60px;">
+      <div class="inb">
+        <input type="text" typeahead-loading="search.loading" ng-model="search.event" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue)" typeahead-template-url="customTemplate.html" class="search__query" placeholder="Event name" />
+      </div>
+      <div class="inb">
+        <input type="text" ng-model="search.airport" typeahead="airport as airport.name for airport in search.airports" class="search__location" placeholder="Nearby airport" />
+      </div>
+      <div class="inb">
+        <input class="search__submit" type="submit" />
+      </div>
     </div>
   </div>
-
-</div>
+</form>

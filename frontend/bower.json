@@ -12,7 +12,8 @@
     "animate.css": "~3.4.0",
     "angular": "~1.4.2",
     "angular-foundation": "~0.8.0",
-    "foundation": "~5.5.3"
+    "foundation": "~5.5.3",
+    "ngGeolocation": "^0.0.8"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

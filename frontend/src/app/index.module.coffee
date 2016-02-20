@@ -1,1 +1,1 @@
-angular.module 'upc', ['ngAnimate', 'ngResource', 'ui.router', 'toastr', 'mm.foundation']
+angular.module 'upc', ['ngAnimate', 'ngResource', 'ui.router', 'toastr', 'mm.foundation', 'ngGeolocation']

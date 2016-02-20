@@ -2,7 +2,7 @@ angular.module 'upc'
   .factory 'API', ->
     'ngInject'
 
-    return 'http://edi.iem.pw.edu.pl/matlaczm/app/'
+    return 'http://localhost:5000/matlaczm/app/'
 
 
 
