@@ -35,7 +35,7 @@ because planning just got easy</div>
         <input type="text" ng-model="search.airport" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.airports | filter:$viewValue  | limitTo: 10" typeahead-template-url="airportTemplate.html" ng-class="['search__location', location_loading ? 'loading' : '']" placeholder="Nearby airport" ng-change="location_loading = false" />
       </div>
       <div class="inb">
-        <input class="search__submit" type="submit" value="Create trip proposal for me" />
+        <input class="search__submit" type="submit" value="Create trip proposals for me" />
       </div>
     </div>
   </div>

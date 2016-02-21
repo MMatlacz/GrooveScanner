@@ -16,31 +16,38 @@
 
 <div ng-show="event && !loading_failed" class="bookmark">
     <div class="plan__container small-7 columns">
-        <div class="plan" ng-repeat="plan in [1,2,3]">
+        <div ng-if="!plans" class="error">
+            <div class="error__text">Please wait
+            <small>Looking for suitable plans for you.</small></div>
+        </div>
+
+        <a ng-click="modal('test')">TEST</a>
+
+        <div class="plan" ng-click="seeDetails(plan)" ng-repeat="plan in plans">
             <div class="plan__airport">
-                <img src="https://image.freepik.com/free-icon/airplane-and-airport-tower_318-64628.png" />
+                <img src="assets/flight.png" />
 
                 <div class="plan__data">
-                    <div class="name">Barcelona T1, Spain</div>
-                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                    <div class="name">{{ sourceAirport.city }}, {{ sourceAirport.country }}</div>
+                    <div class="description">departure on {{ plan.In|date:"dd MMMM yyyy" }}</div>
                 </div>
             </div>
 
             <div class="plan__hotel">
-                <img src="https://image.freepik.com/free-icon/person-sleeping-on-a-bed_318-27520.png" />
+                <img src="assets/hostel.png" />
 
                 <div class="plan__data">
-                    <div class="smaller_name">Barcelona T1, Spain</div>
-                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                    <div class="smaller_name">{{ plan.hotel.name|characters:33:true }}</div>
+                    <div class="description">approx. {{ plan.hotel.distance_from_search }} km from airport</div>
                 </div>
             </div>
 
             <div class="plan__airport">
-                <img src="https://image.freepik.com/free-icon/airplane-and-airport-tower_318-64628.png" />
+                <img src="assets/flight.png" />
 
                 <div class="plan__data">
-                    <div class="name">Barcelona T1, Spain</div>
-                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                    <div class="name">{{ event.place.location.city }}, {{ event.place.location.country }}</div>
+                    <div class="description">departure on {{ plan.Out|date:"dd MMMM yyyy" }}</div>
                 </div>
             </div>
 
@@ -67,22 +74,19 @@
             <div class="event__venue">
                 {{ event.place.location.street }}<br />({{ event.place.location.zip }}) {{ event.place.location.city }}, {{ event.place.location.country }}
             </div>
-            <div class="event__more">
-
-            </div>
         </div>
 
         <div class="event__social">
             Share these proposals
-            <br /><br />
+            <br />
 
-            <a ng-href="#fb">
+            <a social-facebook>
                 <img src="assets/fb.jpg" />
             </a>
-            <a ng-href="#gplus">
+            <a social-gplus>
                 <img src="assets/gplus.jpg" />
             </a>
-            <a ng-href="#twitter">
+            <a social-twitter>
                 <img src="assets/twitter.jpg" />
             </a>
         </div>
