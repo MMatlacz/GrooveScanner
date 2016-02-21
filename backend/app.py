@@ -65,5 +65,34 @@ def return_airports():
     return airports
 
 
+@app.route(app_url + '/hotel/<city>')
+def hotels(city):
+    if request.method == 'GET':
+        return flyscanner.get_hotels_ids(city)
+
+
+@app.route(app_url + '/hotel/')
+def hotel():
+    if request.method == 'GET':
+        id = request.args['id']
+        checkin = request.args['checkin']
+        checkout = request.args['checkout']
+        guests = request.args['guests']
+        rooms = request.args['rooms']
+        print id, checkin, checkout, guests, rooms
+        return json.dumps(flyscanner.get_hotels_list(id, checkin, checkout, guests, rooms))
+
+    '''
+    market = request.args['market']
+    currency = request.args['currency']
+    locale = request.args['locale']
+    originPlace = request.args['originPlace']
+    destinationPlace = request.args['destinationPlace']
+    outboundPartialDate = request.args['outboundPartialDate']
+    inboundPartialDate = request.args['inboundPartialDate']
+    return flyscanner.return_grid(market, currency, locale, originPlace, destinationPlace, outboundPartialDate,
+                                  inboundPartialDate)'''
+
+
 if __name__ == '__main__':
     app.run()
