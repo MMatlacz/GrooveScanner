@@ -16,23 +16,38 @@
 
 <div ng-show="event && !loading_failed" class="bookmark">
     <div class="plan__container small-7 columns">
-        <div class="plan">
+        <div class="plan" ng-repeat="plan in [1,2,3]">
+            <div class="plan__airport">
+                <img src="https://image.freepik.com/free-icon/airplane-and-airport-tower_318-64628.png" />
 
+                <div class="plan__data">
+                    <div class="name">Barcelona T1, Spain</div>
+                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                </div>
+            </div>
 
-            Plan proposals goes here.
-        </div>
-        <div class="plan">
-            Plan proposals goes here.
-        </div>
-        <div class="plan">
-            Plan proposals goes here.
-        </div>
-        <div class="plan">
-            Plan proposals goes here.
-        </div><div class="plan">
-            Plan proposals goes here.
-        </div>
+            <div class="plan__hotel">
+                <img src="https://image.freepik.com/free-icon/person-sleeping-on-a-bed_318-27520.png" />
 
+                <div class="plan__data">
+                    <div class="smaller_name">Barcelona T1, Spain</div>
+                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                </div>
+            </div>
+
+            <div class="plan__airport">
+                <img src="https://image.freepik.com/free-icon/airplane-and-airport-tower_318-64628.png" />
+
+                <div class="plan__data">
+                    <div class="name">Barcelona T1, Spain</div>
+                    <div class="description">departure on 2016 December 29 (arrival)</div>
+                </div>
+            </div>
+
+            <div class="plan__summary">
+                Total cost: <strong>$250</strong>
+            </div>
+        </div>
     </div>
 
     <div class="event__container small-5 columns">
@@ -47,11 +62,26 @@
                     ng-src="{{ event_map }}"></iframe>
             <br />
             <div class="event__venue">
-                {{ event.venue.street }}<br />({{ event.venue.zip }}) {{ event.venue.city }}, {{ event.venue.country }}
+                {{ event.place.location.street }}<br />({{ event.place.location.zip }}) {{ event.place.location.city }}, {{ event.place.location.country }}
             </div>
             <div class="event__more">
 
             </div>
+        </div>
+
+        <div class="event__social">
+            Share these proposals
+            <br /><br />
+
+            <a ng-href="#fb">
+                <img src="assets/fb.jpg" />
+            </a>
+            <a ng-href="#gplus">
+                <img src="assets/gplus.jpg" />
+            </a>
+            <a ng-href="#twitter">
+                <img src="assets/twitter.jpg" />
+            </a>
         </div>
     </div>
 </div>
