@@ -21,9 +21,7 @@
             <small>Looking for suitable plans for you.</small></div>
         </div>
 
-        <a ng-click="modal('test')">TEST</a>
-
-        <div class="plan" ng-click="seeDetails(plan)" ng-repeat="plan in plans">
+        <div class="plan" ng-click="modal(plan)" ng-repeat="plan in plans">
             <div class="plan__airport">
                 <img src="assets/flight.png" />
 
@@ -52,7 +50,7 @@
             </div>
 
             <div class="plan__summary">
-                Total cost: <strong>$250</strong>
+                Total cost: <strong>{{ plan.hotel.price + plan.price }} EUR</strong>
             </div>
             <div class="plan__summary-info">
                 (click on a plan to see details)
