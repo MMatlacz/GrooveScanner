@@ -47,8 +47,8 @@ def get_event():
                 if event.has_key(key):
                     parsed_event.update({key: event[key]})
 
-        if parsed_event != {}:
-            parsed_results.append(parsed_event)
+            if parsed_event != {}:
+                parsed_results.append(parsed_event)
         return json.dumps(parsed_results[:config.EVENT.get('LIMIT', 10)])
 
 
