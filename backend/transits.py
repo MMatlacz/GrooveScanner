@@ -10,14 +10,12 @@ from flyscanner import return_grid
 def get_connections(event_city, event_country, start_city, start_country, out_time, in_time):
     outairports = []
     destairports = []
-    print event_city, event_country, start_city, start_country, out_time, in_time
     airports = json.loads(flyscanner.get_airports(event_city))
     for airport in airports['Places']:
         if str(airport['CountryName']).lower() == str(event_country).lower() and str(
                 airport['PlaceName']).lower() == str(event_city).lower():
             destairports.append(airport)
     airports = json.loads(flyscanner.get_airports(start_city))
-    print "airports2"
     for airport in airports['Places']:
         if str(airport['CountryName']).lower() == str(start_country).lower() and str(
                 airport['PlaceName']).lower() == str(start_city).lower():
@@ -46,10 +44,13 @@ def get_connections(event_city, event_country, start_city, start_country, out_ti
             i += 1
             output['flights'][i] = {"Out": d1['DateString'], "In": inbound[0]['DateString'], "Price": d2['MinPrice'],
                                     "QuoteDateTime": d2['QuoteDateTime']}
-            print d1
-            print inbound[0]
-            print d2
-            print
 
-    output['places'] = places
-    return json.dumps(output)
+
+    byprice = []
+    for flight in output['flights']:
+        byprice.append(output['flights'][flight])
+
+    byprice.sort(key=lambda tup: tup['Price'])
+
+    #output['places'] = places
+    return json.dumps(byprice[:4])
