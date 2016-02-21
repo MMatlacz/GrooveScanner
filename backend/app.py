@@ -1,3 +1,4 @@
+import HTMLParser
 import json
 import urllib2
 
@@ -90,7 +91,14 @@ def return_airports():
 
 @app.route(app_url + '/airports/<id>')
 def airport(id):
-    return urllib2.urlopen("https://www.wolframcloud.com/objects/caf4da56-9cc9-4673-8bc0-63a1371180ac?code="+id).read()
+    city = urllib2.urlopen("https://www.wolframcloud.com/objects/caf4da56-9cc9-4673-8bc0-63a1371180ac?code="+id).read()
+    city = city[17:]
+    city = city[:-3]
+
+    city = city.split("\"")
+    print city
+
+    return json.dumps({'city': city[3], 'country': city[-2]})
 
 
 if __name__ == '__main__':
