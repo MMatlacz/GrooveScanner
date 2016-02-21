@@ -1,4 +1,5 @@
 import json
+import urllib2
 
 from flask import Flask, request
 
@@ -86,6 +87,10 @@ def transit():
 @app.route(app_url + '/airports/')
 def return_airports():
     return airports
+
+@app.route(app_url + '/airports/<id>')
+def airport(id):
+    return urllib2.urlopen("https://www.wolframcloud.com/objects/caf4da56-9cc9-4673-8bc0-63a1371180ac?code="+id).read()
 
 
 if __name__ == '__main__':
