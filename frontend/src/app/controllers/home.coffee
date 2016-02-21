@@ -3,8 +3,10 @@ angular.module 'upc'
     'ngInject'
 
     $rootScope.bgstate = 'low'
+    $scope.location_loading = true
 
     $geolocation.getCurrentPosition({timeout: 18000}).then (position) ->
+      $scope.location_loading = false
       if not $scope.search.airport
         minimal_distance = null
         found_airport = null
@@ -29,15 +31,12 @@ angular.module 'upc'
       event:null
       airport: null
 
-      loading: false
       search: (query) ->
         return Event.query(query).$promise.then (data) ->
           return data
 
       submit: ->
-        console.log $scope.search
-
-        if not $scope.search.airport or not $scope.search.event
+        if not $scope.search.airport or not $scope.search.event or not $scope.search.airport.code
           toastr.error 'You must input starting airport and event you want to go on.'
           return
 

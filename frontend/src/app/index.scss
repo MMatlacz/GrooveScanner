@@ -138,12 +138,21 @@ header {
   border-bottom-right-radius: 0px !important;
   width:300px !important;
   border-right: 0px !important;
+  &.loading {
+    background-size: 40px 40px !important;
+    background: #fff url('http://mindovermunch.com/wp-content/uploads/AAPL/loaders/Thin%20broken%20ring.gif') no-repeat 250px 10px !important;
+  }
 }
 
 .search__location {
   border-radius:0px !important;
   width:180px !important;
   border-left:1px solid rgba(0,0,0,0.6);
+
+  &.loading {
+    background-size: 40px 40px !important;
+    background: #fff url('http://mindovermunch.com/wp-content/uploads/AAPL/loaders/Thin%20broken%20ring.gif') no-repeat 130px 10px !important;
+  }
 }
 
 .search__submit {

@@ -29,10 +29,10 @@ because planning just got easy</div>
 
     <div class="row" style="line-height:60px;">
       <div class="inb">
-        <input type="text" ng-model="search.event" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue) | limitTo: 10" typeahead-template-url="eventTemplate.html" class="search__query" placeholder="Event name" />
+        <input type="text" ng-model="search.event" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue) | limitTo: 10" typeahead-template-url="eventTemplate.html" ng-class="['search__query', event_loading ? 'loading': '']" typeahead-loading="event_loading" placeholder="Event name" />
       </div>
       <div class="inb">
-        <input type="text" ng-model="search.airport" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.airports | filter:$viewValue  | limitTo: 10" typeahead-template-url="airportTemplate.html" class="search__location" placeholder="Nearby airport"  />
+        <input type="text" ng-model="search.airport" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.airports | filter:$viewValue  | limitTo: 10" typeahead-template-url="airportTemplate.html" ng-class="['search__location', location_loading ? 'loading' : '']" placeholder="Nearby airport" ng-change="location_loading = false" />
       </div>
       <div class="inb">
         <input class="search__submit" type="submit" value="Create trip proposal for me" />
