@@ -24,20 +24,24 @@ def get_connections(event_city, event_country, start_city, start_country, out_ti
     for start in outairports:
         for dest in destairports:
             connections.append(
-                return_grid(flyscanner.market, flyscanner.currency, flyscanner.locale, start['PlaceId'],
+                json.loads(return_grid(flyscanner.market, flyscanner.currency, flyscanner.locale, start['PlaceId'],
                             dest['PlaceId'],
-                            out_time, in_time))
+                            out_time, in_time)))
 
     for conn in connections:
-        conn = json.loads(conn)
+        conn = conn
         carriers = conn['Carriers']
         dates = conn['Dates']
         currencies = conn['Currencies']
         places = conn['Places']
     output = {'flights': {}}
     i = 0
+    d = []
+    for date in dates[0]:
+        if date is not None:
+            d.append(date)
     for inbound in dates[1:]:
-        for d1, d2 in itertools.izip(dates[0], inbound[1:]):
+        for d1, d2 in itertools.izip(d, inbound[1:]):
             if d2 is None or d1 is None or inbound[0] is None:
                 continue
             i += 1
@@ -57,6 +61,6 @@ def get_connections(event_city, event_country, start_city, start_country, out_ti
     #find hotels:
     for flight in cheapest:
         print flight
-        flight['hotel'] = flyscanner.get_hotels(event_city, flight['Out'], flight['In'], 1, 1)
+        flight['hotel'] = json.loads(flyscanner.get_hotels(event_city, flight['Out'], flight['In'], 1, 1))
 
     return json.dumps(cheapest)
