@@ -13,6 +13,9 @@ app_url = '/matlaczm/app'
 app = Flask(__name__)
 app.debug = True
 
+airports_db = open('airports.dat', 'rb+')
+airports = airports_db.read()
+
 CORS(app)
 
 # Facebook client
@@ -84,6 +87,10 @@ def transit():
         out_time = request.args['out_time']
         in_time = request.args['in_time']
         return get_connections(event_city, event_country, start_city, start_country, out_time, in_time)
+
+@app.route(app_url + '/airports/')
+def return_airports():
+    return airports
 
 
 if __name__ == '__main__':
