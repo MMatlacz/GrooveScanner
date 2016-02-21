@@ -4,6 +4,7 @@ import urllib2
 
 from flask import Flask, request
 
+import alpha
 import config
 import facebook
 import flyscanner
@@ -89,6 +90,12 @@ def transit():
 @app.route(app_url + '/airports/')
 def return_airports():
     return airports
+
+
+@app.route(app_url + '/wolfram/<id>/')
+def get_airport_detais_wolfram(id):
+    if request.method == 'GET':
+        return json.dumps(alpha.wolfram.get_airport_details(id))
 
 
 @app.route(app_url + '/airports/<id>/')
