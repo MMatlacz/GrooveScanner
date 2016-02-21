@@ -1,6 +1,5 @@
 import urllib2
 
-import itertools
 from flask import json
 
 market = "UK"
@@ -110,7 +109,10 @@ def get_hotels_list(entity_id, checkin_date, checkout_date, guests, rooms):
     url = "http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v2/{}/{}/{}/{}/{}/{}/{}/{}?apiKey={}".format(
         market, currency, locale, entity_id, checkin_date, checkout_date, guests, rooms, api_key
     )
-    hotels_list = urllib2.urlopen(url).read()
+    try:
+        hotels_list = urllib2.urlopen(url).read()
+    except urllib2.HTTPError:
+        hotels_list = None
     # next_poll = "http://partners.api.skyscanner.net" + hotels_list.info().getheader('Location')
     # hotels_list = hotels_list.read()
     '''

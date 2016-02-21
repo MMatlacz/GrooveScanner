@@ -1,12 +1,12 @@
-import config
 import json
-import flyscanner
-import facebook
 
 from flask import Flask, request
 
-from transits import get_connections
+import config
+import facebook
+import flyscanner
 from cors import CORS
+from transits import get_connections
 
 # Set up Flask API
 app_url = '/matlaczm/app'
@@ -76,7 +76,6 @@ def transit():
         out_time = request.args['out_time']
         in_time = request.args['in_time']
         return get_connections(event_city, event_country, start_city, start_country, out_time, in_time)
-
 
 if __name__ == '__main__':
     app.run()

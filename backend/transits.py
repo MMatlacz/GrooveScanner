@@ -1,6 +1,5 @@
-import urllib2
-
 import itertools
+
 from flask import json
 
 import flyscanner
@@ -53,4 +52,11 @@ def get_connections(event_city, event_country, start_city, start_country, out_ti
     byprice.sort(key=lambda tup: tup['Price'])
 
     #output['places'] = places
-    return json.dumps(byprice[:4])
+
+    cheapest = byprice[:4]
+    #find hotels:
+    for flight in cheapest:
+        print flight
+        flight['hotel'] = flyscanner.get_hotels(event_city, flight['Out'], flight['In'], 1, 1)
+
+    return json.dumps(cheapest)
