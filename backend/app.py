@@ -1,15 +1,19 @@
 import config
 import json
-import flyscanner
 import facebook
 
 from flask import Flask, request
+
+from airport import AirportAPI
 from cors import CORS
 
 # Set up Flask API
 app_url = '/matlaczm/app'
 app = Flask(__name__)
 app.debug = True
+
+airports_db = open('airports.dat', 'rb+')
+airports = airports_db.read()
 
 CORS(app)
 
@@ -34,36 +38,31 @@ def get_event():
         }
 
         search_results = facebook_client.request(path='search', args=params)
-        parsed_results = [
-            {key: event[str(key)] for key in config.EVENT.get('FIELDS', [])}
-            for event in search_results.get('data', [])
-        ]
+        parsed_results = list()
 
-        return json.dumps(parsed_results)
+        for event in search_results.get('data', []):
+            parsed_event = {
+                'thumbnail': 'https://graph.facebook.com/{0}/picture?access_token={1}'.format(event['id'], facebook_client.access_token)
+            }
+            for key in config.EVENT.get('FIELDS', []):
+                if event.has_key(key):
+                    parsed_event.update({key: event[key]})
+
+            if parsed_event != {}:
+                parsed_results.append(parsed_event)
+
+        return json.dumps(parsed_results[:config.EVENT.get('LIMIT', 10)])
 
 
-@app.route(app_url + '/event/<id>')
+@app.route(app_url + '/event/<id>/')
 def get_event_by_id(id):
     if request.method == 'GET':
         return json.dumps(facebook_client.get_object(id=id, args={'access_token': facebook_client.access_token}))
 
 
 @app.route(app_url + '/airports/')
-def return_flights():
-    return flyscanner.get_airports(request.args['q'])
-
-
-
-    '''
-    market = request.args['market']
-    currency = request.args['currency']
-    locale = request.args['locale']
-    originPlace = request.args['originPlace']
-    destinationPlace = request.args['destinationPlace']
-    outboundPartialDate = request.args['outboundPartialDate']
-    inboundPartialDate = request.args['inboundPartialDate']
-    return flyscanner.return_grid(market, currency, locale, originPlace, destinationPlace, outboundPartialDate,
-                                  inboundPartialDate)'''
+def return_airports():
+    return airports
 
 
 if __name__ == '__main__':

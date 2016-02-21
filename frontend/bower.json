@@ -13,7 +13,8 @@
     "angular": "~1.4.2",
     "angular-foundation": "~0.8.0",
     "foundation": "~5.5.3",
-    "ngGeolocation": "^0.0.8"
+    "ngGeolocation": "^0.0.8",
+    "angular-truncate": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

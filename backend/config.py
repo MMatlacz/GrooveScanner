@@ -4,5 +4,11 @@ FACEBOOK = {
 }
 
 EVENT = {
-    'FIELDS': ['name']
+    'FIELDS': ['id', 'name', 'start_time', 'end_time', 'thumbnail'],
+    'LIMIT': 15
 }
+
+AIRPORT = {
+    'API_KEY': '574ba58133fe3a81f705561f2d65abff'
+}
+
