@@ -61,11 +61,6 @@ def get_event_by_id(id):
         return json.dumps(facebook_client.get_object(id=id, args={'access_token': facebook_client.access_token}))
 
 
-@app.route(app_url + '/airports/')
-def return_flights():
-    return flyscanner.get_airports(request.args['q'])
-
-
 @app.route(app_url + '/hotel/')
 def hotels():
     if request.method == 'GET':
