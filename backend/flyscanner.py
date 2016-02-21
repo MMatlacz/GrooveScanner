@@ -5,6 +5,7 @@ market = "UK"
 currency = "EUR"
 locale = "en-GB"
 
+
 def get_api_key():
     return 'ah197772008646643372222298324115'
 
@@ -53,9 +54,6 @@ def get_currencies():
     return json.dumps(currencies)
 
 
-
-
-
 def get_airports(query):
     api_key = get_api_key()
     url = 'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/{}/{}/{}/?query={}&apiKey={}'.format(
@@ -67,7 +65,7 @@ def get_airports(query):
     return json.dumps(currencies)
 
 
-def get_hotels_ids(query): #query is city name
+def get_hotels_ids(query):  # query is city name
     api_key = get_api_key()
     url = "http://partners.api.skyscanner.net/apiservices/hotels/autosuggest/v2/{}/{}/{}/{}?apikey={}".format(
         market, currency, locale, query, api_key
@@ -80,7 +78,7 @@ def get_hotels_ids(query): #query is city name
 
 # hotels have unique entity_id
 def get_hotels_list(entity_id, checkin_date, checkout_date, guests, rooms):
-    #create session
+    # create session
     api_key = get_api_key()
     url = "http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v2/{}/{}/{}/{}/{}/{}/{}/{}?apiKey={}".format(
         market, currency, locale, entity_id, checkin_date, checkout_date, guests, rooms, api_key
@@ -91,9 +89,7 @@ def get_hotels_list(entity_id, checkin_date, checkout_date, guests, rooms):
     hotels_list = hotels_list.read()
     hotels_list = json.loads(hotels_list)
 
-    print "-----"
-    print hotels_list
-    #polling session
+    # polling session
     extended_hotels_list = [hotels_list]
     while hotels_list['status'] != "COMPLETE":
         hotels_list = urllib2.urlopen(next_poll)
@@ -101,8 +97,7 @@ def get_hotels_list(entity_id, checkin_date, checkout_date, guests, rooms):
         hotels_list = hotels_list.read()
         hotels_list = json.loads(hotels_list)
         extended_hotels_list.append(hotels_list)
-    print extended_hotels_list
-    return extended_hotels_list
+    return json.dumps(extended_hotels_list)
 
 
 # print get_currencies()
