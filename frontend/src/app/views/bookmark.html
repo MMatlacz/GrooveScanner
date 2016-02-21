@@ -1,0 +1,55 @@
+<header class="belt">
+  <div class="header__title">
+      <a class="header__back" ui-sref="home">⬅</a>GrooveScanner
+  </div>
+  <div class="header__subtitle">
+      Quality events on a budget because planning just got easy
+  </div>
+</header>
+
+
+<div ng-if="loading_failed" class="error">
+    <div class="error__icon">&#9785;</div>
+    <div class="error__text">Error occured
+    <small>{{ loading_failed }}</small></div>
+</div>
+
+<div ng-show="event && !loading_failed" class="bookmark">
+    <div class="plan__container small-7 columns">
+        <div class="plan">
+            Plan proposals goes here.
+        </div>
+        <div class="plan">
+            Plan proposals goes here.
+        </div>
+        <div class="plan">
+            Plan proposals goes here.
+        </div>
+        <div class="plan">
+            Plan proposals goes here.
+        </div><div class="plan">
+            Plan proposals goes here.
+        </div>
+
+    </div>
+
+    <div class="event__container small-5 columns">
+        <div class="event">
+            <div class="event__name">{{ event.name }}</div>
+            <div class="event__time">{{ event.start_time|date:"dd MMMM yyyy" }} to {{ event.end_time|date:"dd MMMM yyyy" }}</div>
+            <div class="event__description">{{ event.description | characters:225 :true}}</div>
+
+            <iframe class="event__map"
+                    frameborder="0" scrolling="no"
+                    marginheight="0" marginwidth="0"
+                    ng-src="{{ event_map }}"></iframe>
+            <br />
+            <div class="event__venue">
+                {{ event.venue.street }}<br />({{ event.venue.zip }}) {{ event.venue.city }}, {{ event.venue.country }}
+            </div>
+            <div class="event__more">
+
+            </div>
+        </div>
+    </div>
+</div>

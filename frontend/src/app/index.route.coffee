@@ -18,7 +18,7 @@ angular.module 'upc'
         controller: 'EventController'
 
       .state 'bookmark',
-        url: '/bookmark/:id'
+        url: '/bookmark/:airport/:event_id/'
         templateUrl: 'app/views/bookmark.html'
         controller: 'BookmarkController'
 

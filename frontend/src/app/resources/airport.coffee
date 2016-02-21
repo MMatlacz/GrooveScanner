@@ -5,6 +5,8 @@ angular.module 'upc'
     resource = $resource API + 'airports/', null
 
     return {
-      query: -> resource.query()
+      cache: null
+      query: (lng, lat) ->
+        @cache = resource.query({lng: lng, lat: lat})
     }
 

@@ -21,8 +21,23 @@ body {
   left:0;
   top:0;
   width:100%;
-  height: 100%;
+  height: 150%;
   z-index: 1;
+
+  background-position: 0px 0px;
+
+  -webkit-transition: 1600ms ease;
+   -moz-transition: 1600ms ease;
+     -o-transition: 1600ms ease;
+        transition: 1600ms ease;
+
+  &.low {
+    background-position: 0px 0px;
+  }
+
+  &.high {
+    background-position: 0px -200px;
+  }
 }
 
 [ui-view] {
@@ -30,7 +45,6 @@ body {
   left:0;
   top:0;
   width:100%;
-  height:auto;
 
   z-index: 10;
 }
@@ -40,19 +54,48 @@ header {
   height: 100%;
   text-align: center;
   color: #fff;
+
+  &.belt {
+    opacity:1;
+
+    -webkit-animation: fadein 2s;
+       -moz-animation: fadein 2s;
+        -ms-animation: fadein 2s;
+         -o-animation: fadein 2s;
+            animation: fadein 2s;
+
+    background:rgba(255,255,255,0.95) !important;
+    height:62px;
+
+    -webkit-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+    box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+
+    .header__title { float:left; width:40%; margin-top:0px !important; color:#333; font-size:32pt; line-height: 60px; vertical-align: middle; }
+    .header__subtitle { float:right; font-size:14pt !important; width:50%; margin-top:2px !important; line-height: 60px; vertical-align: middle; color:#444; }
+  }
 }
 
 .header__title {
   font-weight:800;
-  font-size:52pt;
+  font-size:56pt;
   margin:100px 0px 0px 0px;
-  text-shadow:1px 1px 3px rgba(0,0,0, 0.1);
+  text-shadow:1px 1px 3px rgba(0,0,0, 0.2);
   letter-spacing:-1px;
 }
 
 .header__subtitle {
   font-weight:400;
-  font-size:20pt;
+  font-size:18pt;
+  margin-top:-10px;
+  text-shadow:1px 1px 3px rgba(0,0,0, 0.1);
+}
+
+.header__back {
+  font-size:27pt !important;
+  display:inline-block;
+  margin-right:20px;
+  color:#aaa !important;
 }
 
 /** SEARCH BOX **/
@@ -63,9 +106,9 @@ header {
   padding:12px;
 
   text-align: center;
-  margin: 30px auto auto;
+  margin: 80px auto auto;
 
-  width:600px;
+  width:800px;
 
   .columns {
     padding:0 !important;
@@ -75,7 +118,8 @@ header {
 .search input {
   background: #fff;
 
-  padding: 0 1em;
+  padding: 0 1em !important;
+  height:60px;
   margin-top:16px;
   border-radius: 10px;
   border:1px solid rgba(0,0,0,0.3);
@@ -148,8 +192,157 @@ header {
   padding-right: 15px;
 }
 
+/** BOOKMARK SECTION **/
+.bookmark {
+  @include grid-row;
+  margin-top:30px !important;
+}
 
-/* Do not remove the comments below. It's the markers used by gulp-inject to inject
-   all your sass files automatically */
+.event__container {
+  padding:10px;
+}
+
+.plan__container {
+  padding:10px;
+}
+
+
+@mixin uno {
+  font-size:24pt !important;
+  font-weight: 600;
+}
+
+@mixin duo {
+  font-size:11pt !important;
+  line-height:20px;
+  font-weight: 300;
+}
+
+.spacer { display:block; width:100%; height:1px; border-bottom:1px solid rgba(0,0,0,0.15); margin:20px 0px; }
+
+/** EVENT **/
+.event {
+  background:rgba(255,255,255,0.95);
+  padding:12px 8px;
+
+
+  -webkit-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+}
+
+.event__name {
+  @include uno;
+}
+.event__description {
+  @include duo;
+  padding:5px 15px;
+}
+.event__time {
+  @include duo;
+  padding:5px 5px;
+}
+.event__venue {
+  @include duo;
+  padding:5px 15px;
+}
+
+.event__map {
+  margin-top:40px;
+  width:100%;
+  height:250px;
+}
+
+
+/** button($bg-hover:null, $border-color:null, $transition: true) { **/
+.event__share {
+  @include button(red);
+}
+
+/** PLAN **/
+.plan {
+  background:rgba(255,255,255,0.95);
+  padding:12px 8px;
+
+  -webkit-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.35);
+
+  margin-bottom:20px;
+}
+
+/** ERROR **/
+.error {
+  margin:100px;
+  color:#fff !important;
+  text-align:center;
+  text-shadow:3px 3px 3px rgba(0,0,0,0.3);
+}
+.error__icon {
+  font-size:152pt !important;
+}
+.error__text {
+  font-size:24pt !important;
+
+  small {
+    font-size:18px;
+    display:block;
+  }
+}
+
+/** FOOTER **/
+footer {
+  margin-top:40px;
+  margin-bottom:10px;
+  padding:10px 0px;
+  color:#fff;
+  font-weight:100;
+  line-height: 100px;
+  vertical-align: middle;
+  background:rgba(0,0,0,0.1);
+}
+.footer__label {
+  display:inline-block;
+  margin-right:40px;
+  font-size:10pt;
+}
+.footer__sponsor {
+  max-height:70px;
+  margin-right:15px;
+  display:inline-block;
+}
+
+
+/** FADE IN ANIMATION **/
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 // injector
 // endinjector

@@ -4,12 +4,21 @@
 because planning just got easy</div>
 </header>
 
-<script type="text/ng-template" id="customTemplate.html">
+<script type="text/ng-template" id="eventTemplate.html">
   <a>
     <img class="typeahead__thumbnail" ng-src="{{ match.model.thumbnail }}" ng-if="match.model.thumbnail" />
     <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
     <div class="typeahead__date">
-      <span ng-if="match.model.starting_date">{{ match.model.starting_date }} <span ng-if="match.model.ending_date">to {{ match.model.ending_date}}</span></span>
+      <span ng-if="match.model.start_time">{{ match.model.start_time|date:"dd MMMM yyyy" }} <span ng-if="match.model.end_time">to {{ match.model.end_time|date:"dd MMMM yyyy"}}</span></span>
+    </div>
+  </a>
+</script>
+
+<script type="text/ng-template" id="airportTemplate.html">
+  <a>
+    <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+    <div class="typeahead__date">
+      {{ match.model.code }}
     </div>
   </a>
 </script>
@@ -20,14 +29,25 @@ because planning just got easy</div>
 
     <div class="row" style="line-height:60px;">
       <div class="inb">
-        <input type="text" typeahead-loading="search.loading" ng-model="search.event" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue)" typeahead-template-url="customTemplate.html" class="search__query" placeholder="Event name" />
+        <input type="text" ng-model="search.event" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.search($viewValue) | limitTo: 10" typeahead-template-url="eventTemplate.html" class="search__query" placeholder="Event name" />
       </div>
       <div class="inb">
-        <input type="text" ng-model="search.airport" typeahead="airport as airport.name for airport in search.airports" class="search__location" placeholder="Nearby airport" />
+        <input type="text" ng-model="search.airport" data-typeahead-wait-ms="500" typeahead="key as key.name for key in search.airports | filter:$viewValue  | limitTo: 10" typeahead-template-url="airportTemplate.html" class="search__location" placeholder="Nearby airport"  />
       </div>
       <div class="inb">
-        <input class="search__submit" type="submit" />
+        <input class="search__submit" type="submit" value="Create trip proposal for me" />
       </div>
     </div>
   </div>
 </form>
+
+<footer>
+    <div class="footer__label">Powered by</div>
+
+    <div class="footer__sponsor">
+      <img src="http://www.skyscanner.net/images/LinkToUs/125x125.png" />
+    </div>
+    <div class="footer__sponsor">
+      <img src="http://www.wolfram.com/common/images/gl-logo-spikey.png" />
+    </div>
+</footer>
