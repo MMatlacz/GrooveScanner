@@ -50,8 +50,6 @@ def get_connections(event_city, event_country, start_city, start_country, out_ti
             print inbound[0]
             print d2
             print
+
     output['places'] = places
     return json.dumps(output)
-
-# result = get_connections("Barcelona", "Spain", "Brussels", "Belgium", "2016-08", "2016-08")
-# print result

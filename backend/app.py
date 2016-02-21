@@ -55,22 +55,16 @@ def return_flights():
     return flyscanner.get_airports(request.args['q'])
 
 
-@app.route(app_url + '/hotel/<city>')
-def hotels(city):
-    if request.method == 'GET':
-        return flyscanner.get_hotels_ids(city)
-
-
 @app.route(app_url + '/hotel/')
-def hotel():
+def hotels():
     if request.method == 'GET':
-        id = request.args['id']
+        city = request.args['city']
         checkin = request.args['checkin']
         checkout = request.args['checkout']
         guests = request.args['guests']
         rooms = request.args['rooms']
-        print id, checkin, checkout, guests, rooms
-        return json.dumps(flyscanner.get_hotels_list(id, checkin, checkout, guests, rooms))
+        return flyscanner.get_hotels(city, checkin, checkout, guests, rooms)
+
 
 @app.route(app_url + '/to/')
 def transit():
