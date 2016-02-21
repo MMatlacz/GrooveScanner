@@ -89,7 +89,7 @@ def transit():
 def return_airports():
     return airports
 
-@app.route(app_url + '/airports/<id>')
+@app.route(app_url + '/airports/<id>/')
 def airport(id):
     city = urllib2.urlopen("https://www.wolframcloud.com/objects/caf4da56-9cc9-4673-8bc0-63a1371180ac?code="+id).read()
     city = city[17:]
