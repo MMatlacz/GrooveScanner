@@ -18,7 +18,7 @@
     <div class="plan__container small-7 columns">
         <div ng-if="!plans" class="error">
             <div class="error__text">Please wait
-            <small>Looking for suitable plans for you.</small></div>
+            <small>Looking for suitable plans for you.<br />(it may take a while)</small></div>
         </div>
 
         <div class="plan" ng-click="modal(plan)" ng-repeat="plan in plans">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="plan__summary">
-                Total cost: <strong>{{ plan.hotel.price + plan.price }} EUR</strong>
+                Total cost: <strong>{{ plan.hotel.price + plan.Price }} EUR</strong>
             </div>
             <div class="plan__summary-info">
                 (click on a plan to see details)
