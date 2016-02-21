@@ -3,10 +3,15 @@
 
 <div class="details__section">Flight to {{ event.place.location.city }}, {{ event.place.location.country }} on {{ plan.In|date:"dd MMMM yyyy" }}</div>
 <div class="details__img">
-
+    <img src="https://www5b.wolframalpha.com/Calculate/MSP/MSP11920h1e3c54670f6d400002e5d051e5083930a?MSPStoreType=image/gif&s=42" />
 </div>
 
 <div class="details__section">Acommondation at {{ plan.hotel.name }}</div>
 <div class="details__subsection">({{ plan.hotel.star_rating }} stars hotel, approx. {{ plan.hotel.distance_from_search }} km from airport)</div>
 
+
+<div class="details__section">Flight to {{ sourceAirport.city }}, {{ sourceAirport.country }} on {{ plan.Out|date:"dd MMMM yyyy" }}</div>
+<div class="details__img">
+    <img src="https://www4c.wolframalpha.com/Calculate/MSP/MSP301i401h0796daadih00001ifeb871701ih83b?MSPStoreType=image/gif&s=57" />
+</div>
 

@@ -262,6 +262,7 @@ header {
 .details__title { @include uno; }
 .details__section { @include duo; font-size:16pt !important; }
 .details__subsection { margin:15px 0px !important; @include duo; }
+.details__img { margin:10px !important; }
 
 /** EVENT **/
 .event {

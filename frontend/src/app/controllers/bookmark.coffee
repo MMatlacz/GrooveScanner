@@ -1,5 +1,5 @@
 angular.module 'upc'
-  .controller 'BookmarkController', ($scope, $rootScope, $sce, $stateParams, $modal, toastr, Airport, Event, Plan) ->
+  .controller 'BookmarkController', ($scope, $rootScope, $sce, $stateParams, $modal, toastr, Airport, Wolfram, Event, Plan) ->
     'ngInject'
 
     $rootScope.bgstate = 'high'
@@ -9,12 +9,17 @@ angular.module 'upc'
 
     $scope.modal = (plan) ->
       event = $scope.event
+      sourceAirport = $scope.sourceAirport
+      # wolfram = Wolfram.get(sourceAirport)
+      wolfram = {}
 
       $modal.open
         templateUrl: 'app/views/bookmark_details.html'
         controller: ($scope) ->
           $scope.plan = plan
+          $scope.sourceAirport = sourceAirport
           $scope.event = event
+          $scope.wolfram = wolfram
 
     Event.get($stateParams.event_id).$promise.then (event) ->
       $scope.event = event
