@@ -4,7 +4,7 @@ FACEBOOK = {
 }
 
 EVENT = {
-    'FIELDS': ['id', 'name', 'start_time', 'end_time', 'thumbnail'],
+    'FIELDS': ['id', 'name', 'start_time', 'end_time'],
     'LIMIT': 15
 }
 

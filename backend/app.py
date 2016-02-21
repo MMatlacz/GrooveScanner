@@ -1,10 +1,11 @@
 import config
 import json
+import flyscanner
 import facebook
 
 from flask import Flask, request
 
-from airport import AirportAPI
+from transits import get_connections
 from cors import CORS
 
 # Set up Flask API
@@ -12,20 +13,17 @@ app_url = '/matlaczm/app'
 app = Flask(__name__)
 app.debug = True
 
-airports_db = open('airports.dat', 'rb+')
-airports = airports_db.read()
-
 CORS(app)
 
 # Facebook client
 facebook_app_id = config.FACEBOOK.get('APPLICATION_ID')
 facebook_app_secret = config.FACEBOOK.get('APPLICATION_SECRET')
 
-#facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
+# facebook_access_token = facebook.get_app_access_token(app_id=facebook_app_id, app_secret=facebook_app_secret)
 facebook_client = facebook.GraphAPI(access_token='')
 
 # temporary acc_token hack
-facebook_client.access_token = 'CAAKMrAl97iIBAMw2HbloZAGrjpoyi8hQ6fMUtACOV6rerZBglvSy5f6OtrE4xPaiOOZA7pVBZBLmZAHwGIr5cj8d7uKIvAExQJYdcgnhT6TPamZBoLwusTIXFdHCFDfhftfxUSsTf2U9ZBv3WZBKA1jZAhXrJ1uhwCUna068rqTcrZB3a6Pq4ml6haBdY6eSWd5brFIZBLE1Bx9VlNRcmvjnyrdCEJTQPmHvGEaWNP7nQgrwAZDZD'
+facebook_client.access_token = 'CAACEdEose0cBALZB9AtbLMwl6w6Eeu1MR3McgzcQwZAOhgjd5dxRpmxWvUl0ieeNYbZC7bvOnoTXHND5jjNU1OliNShM0xL7UBp5KQi89eYXVm6jRHRy1ShYQOb9sXhkw6Fy8qLSyLv7XS5V2AI6fBj9pgRtJHhkslK5Le4srnbXCUedYOeY3NOSZCuHxtrzUW5fHCSueZAvQZCLZBvj59a'
 
 
 @app.route(app_url + '/event/')
@@ -38,31 +36,23 @@ def get_event():
         }
 
         search_results = facebook_client.request(path='search', args=params)
-        parsed_results = list()
+        parsed_results = [
+            {key: event[str(key)] for key in config.EVENT.get('FIELDS', [])}
+            for event in search_results.get('data', [])
+            ]
 
-        for event in search_results.get('data', []):
-            parsed_event = {
-                'thumbnail': 'https://graph.facebook.com/{0}/picture?access_token={1}'.format(event['id'], facebook_client.access_token)
-            }
-            for key in config.EVENT.get('FIELDS', []):
-                if event.has_key(key):
-                    parsed_event.update({key: event[key]})
-
-            if parsed_event != {}:
-                parsed_results.append(parsed_event)
-
-        return json.dumps(parsed_results[:config.EVENT.get('LIMIT', 10)])
+        return json.dumps(parsed_results)
 
 
-@app.route(app_url + '/event/<id>/')
+@app.route(app_url + '/event/<id>')
 def get_event_by_id(id):
     if request.method == 'GET':
         return json.dumps(facebook_client.get_object(id=id, args={'access_token': facebook_client.access_token}))
 
 
 @app.route(app_url + '/airports/')
-def return_airports():
-    return airports
+def return_flights():
+    return flyscanner.get_airports(request.args['q'])
 
 
 @app.route(app_url + '/hotel/<city>')
@@ -82,16 +72,16 @@ def hotel():
         print id, checkin, checkout, guests, rooms
         return json.dumps(flyscanner.get_hotels_list(id, checkin, checkout, guests, rooms))
 
-    '''
-    market = request.args['market']
-    currency = request.args['currency']
-    locale = request.args['locale']
-    originPlace = request.args['originPlace']
-    destinationPlace = request.args['destinationPlace']
-    outboundPartialDate = request.args['outboundPartialDate']
-    inboundPartialDate = request.args['inboundPartialDate']
-    return flyscanner.return_grid(market, currency, locale, originPlace, destinationPlace, outboundPartialDate,
-                                  inboundPartialDate)'''
+@app.route(app_url + '/to/')
+def transit():
+    if request.method == 'GET':
+        event_city = request.args['event_city']
+        event_country = request.args['event_country']
+        start_city = request.args['start_city']
+        start_country = request.args['start_country']
+        out_time = request.args['out_time']
+        in_time = request.args['in_time']
+        return get_connections(event_city, event_country, start_city, start_country, out_time, in_time)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,9 @@
 import urllib2
 from flask import json
 
+market = "UK"
+currency = "EUR"
+locale = "en-GB"
 
 def get_api_key():
     return 'ah197772008646643372222298324115'
@@ -50,9 +53,7 @@ def get_currencies():
     return json.dumps(currencies)
 
 
-market = "UK"
-currency = "EUR"
-locale = "en-GB"
+
 
 
 def get_airports(query):
