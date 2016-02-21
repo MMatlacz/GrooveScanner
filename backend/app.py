@@ -23,7 +23,7 @@ facebook_app_secret = config.FACEBOOK.get('APPLICATION_SECRET')
 facebook_client = facebook.GraphAPI(access_token='')
 
 # temporary acc_token hack
-facebook_client.access_token = 'CAACEdEose0cBALZB9AtbLMwl6w6Eeu1MR3McgzcQwZAOhgjd5dxRpmxWvUl0ieeNYbZC7bvOnoTXHND5jjNU1OliNShM0xL7UBp5KQi89eYXVm6jRHRy1ShYQOb9sXhkw6Fy8qLSyLv7XS5V2AI6fBj9pgRtJHhkslK5Le4srnbXCUedYOeY3NOSZCuHxtrzUW5fHCSueZAvQZCLZBvj59a'
+facebook_client.access_token = 'CAAYcd83pBg4BAKV6wvZAJH4xv2U1WE7qDSo0RPe4XP5mcZBwwaORiAmjKj95SCxIXntDeBDGGnIgSWS9nuuzqO3udyxvenzFaF9wmcKucxTZAgp4TwUYfMbYpH1aSTT5yNA2uu2ZAasf3vanyz9V2R8XNcRK9meMgULAV7MGJHStJYWjM2cWk7ZA41LVAJ1UZD'
 
 
 @app.route(app_url + '/event/')
