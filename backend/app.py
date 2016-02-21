@@ -44,7 +44,7 @@ def get_event():
         return json.dumps(parsed_results)
 
 
-@app.route(app_url + '/event/<id>')
+@app.route(app_url + '/event/<id>/')
 def get_event_by_id(id):
     if request.method == 'GET':
         return json.dumps(facebook_client.get_object(id=id, args={'access_token': facebook_client.access_token}))
