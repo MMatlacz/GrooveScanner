@@ -16,6 +16,7 @@ def return_grid(market, currency, locale, originPlace, destinationPlace, outboun
     url = 'http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{}/{}/{}/{}/{}/{}/{}?apiKey={}'.format(
         market, currency, locale, originPlace, destinationPlace, outboundPartialDate, inboundPartialDate, api_key
     )
+    print url
     grid = urllib2.urlopen(url).read()
     grid = json.loads(grid)
 
@@ -74,7 +75,10 @@ def get_hotels(query, checkin_date, checkout_date, guests, rooms):
         ids.append(result['individual_id'])
     hotels = {}
     for id in ids:
-        hotels['id'] = json.loads(get_hotels_list(id, checkin_date, checkout_date, guests, rooms))
+        try:
+            hotels['id'] = json.loads(get_hotels_list(id, checkin_date, checkout_date, guests, rooms))
+        except TypeError:
+            continue
 
     min_price = None
     id = None
