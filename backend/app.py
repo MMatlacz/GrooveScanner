@@ -36,12 +36,20 @@ def get_event():
         }
 
         search_results = facebook_client.request(path='search', args=params)
-        parsed_results = [
-            {key: event[str(key)] for key in config.EVENT.get('FIELDS', [])}
-            for event in search_results.get('data', [])
-            ]
+        parsed_results = list()
 
-        return json.dumps(parsed_results)
+        for event in search_results.get('data', []):
+            parsed_event = {
+                'thumbnail': 'https://graph.facebook.com/{0}/picture?access_token={1}'.format(event['id'],
+                                                                                              facebook_client.access_token)
+            }
+            for key in config.EVENT.get('FIELDS', []):
+                if event.has_key(key):
+                    parsed_event.update({key: event[key]})
+
+        if parsed_event != {}:
+            parsed_results.append(parsed_event)
+        return json.dumps(parsed_results[:config.EVENT.get('LIMIT', 10)])
 
 
 @app.route(app_url + '/event/<id>/')
@@ -76,6 +84,7 @@ def transit():
         out_time = request.args['out_time']
         in_time = request.args['in_time']
         return get_connections(event_city, event_country, start_city, start_country, out_time, in_time)
+
 
 if __name__ == '__main__':
     app.run()
