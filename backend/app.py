@@ -11,15 +11,11 @@ import flyscanner
 from cors import CORS
 from transits import get_connections
 
-# Set up Flask API
+
 app_url = '/api'
-app = Flask(__name__)
-app.debug = True
 
 airports_db = open('airports.dat', 'rb+')
 airports = airports_db.read()
-
-CORS(app)
 
 # Facebook client
 facebook_app_id = config.FACEBOOK.get('APPLICATION_ID')
@@ -110,5 +106,10 @@ def airport(id):
     return json.dumps({'city': city[3], 'country': city[-2]})
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+def setup_app():
+    app = Flask(__name__)
+    app.debug = True
+    CORS(app)
+
+    return app
+
