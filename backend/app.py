@@ -11,6 +11,9 @@ import flyscanner
 from cors import CORS
 from transits import get_connections
 
+app = Flask(__name__)
+app.debug = True
+CORS(app)
 
 app_url = '/api'
 
@@ -105,11 +108,6 @@ def airport(id):
 
     return json.dumps({'city': city[3], 'country': city[-2]})
 
-
-def setup_app():
-    app = Flask(__name__)
-    app.debug = True
-    CORS(app)
-
-    return app
+if __name__ == '__main__':
+    app.run()
 
