@@ -12,7 +12,7 @@ from cors import CORS
 from transits import get_connections
 
 # Set up Flask API
-app_url = '/matlaczm/app'
+app_url = '/api/'
 app = Flask(__name__)
 app.debug = True
 
