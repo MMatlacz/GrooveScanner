@@ -1,21 +1,24 @@
-import HTMLParser
 import json
 import urllib2
+from wsgiref import simple_server
 
 from flask import Flask, request
 
-import alpha
 import config
 import facebook
 import flyscanner
 from cors import CORS
 from transits import get_connections
 
-
-app_url = '/api'
+# Set up Flask API
+app_url = '/matlaczm/app'
+app = Flask(__name__)
+app.debug = True
 
 airports_db = open('airports.dat', 'rb+')
 airports = airports_db.read()
+
+CORS(app)
 
 # Facebook client
 facebook_app_id = config.FACEBOOK.get('APPLICATION_ID')
@@ -82,21 +85,15 @@ def transit():
         in_time = request.args['in_time']
         return get_connections(event_city, event_country, start_city, start_country, out_time, in_time)
 
-
 @app.route(app_url + '/airports/')
 def return_airports():
     return airports
 
-
-@app.route(app_url + '/wolfram/<id>/')
-def get_airport_detais_wolfram(id):
-    if request.method == 'GET':
-        return json.dumps(alpha.wolfram.get_airport_details(id))
-
-
-@app.route(app_url + '/airports/<id>/')
+@app.route(app_url + '/airports/<id>')
 def airport(id):
-    city = urllib2.urlopen("https://www.wolframcloud.com/objects/caf4da56-9cc9-4673-8bc0-63a1371180ac?code="+id).read()
+    url = "https://www.open.wolframcloud.com/objects/b032f4f4-eb14-4ceb-9d5e-1dd424af5d21/?code="+id
+    print url
+    city = urllib2.urlopen(url).read()
     city = city[17:]
     city = city[:-3]
 
@@ -106,10 +103,6 @@ def airport(id):
     return json.dumps({'city': city[3], 'country': city[-2]})
 
 
-def setup_app():
-    app = Flask(__name__)
-    app.debug = True
-    CORS(app)
-
-    return app
-
+if __name__ == '__main__':
+    httpd = simple_server.make_server('127.0.0.1', 5000, app)
+    httpd.serve_forever()
