@@ -8,7 +8,7 @@ locale = "en-GB"
 
 
 def get_api_key():
-    return 'ah197772008646643372222298324115'
+    return 'api-key'
 
 
 def return_grid(market, currency, locale, originPlace, destinationPlace, outboundPartialDate, inboundPartialDate):
